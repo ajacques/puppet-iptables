@@ -45,7 +45,7 @@ Examples:
 
 
     ports = ports.split(',') if ports.kind_of?(String)
-    ports.uniq!
+    ports = ports.uniq
 
     # special case -- we weren't given an empty array or string
     if ports.size == 0
@@ -59,7 +59,7 @@ Examples:
     # if we've got at least one good one, we'll just skip the bad ones and warn
     # the user.  otherwise, we'll throw a parse error
     to_delete = Array.new 
-    ports.each { |p| to_delete.push(p) unless p =~ /^[0-9]+(:[0-9]+)?$/ }
+    ports.each { |p| to_delete.push(p) unless p =~ /^[0-9]+(:[0-9]+)?$/ || p.kind_of?(Numeric) }
 
     # delete ports if they aren't numeric, maybe we'll support well-known ports
     # in the future...
